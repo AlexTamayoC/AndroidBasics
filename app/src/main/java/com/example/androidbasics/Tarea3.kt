@@ -1,34 +1,40 @@
 package com.example.androidbasics
 
+val pedidoMinimo = 20
+
 val cantidadIngrediente = arrayOf(
-    20.0,
-    1.0,
-    7.4,
-    3.75,
-    1.5,
-    0.15,
-    0.5,
-    12.0
+    20.0, //Harina
+    1.0,    //Levadura
+    7.5,    //Azucar
+    3.75,   //Leche
+    1.5,    //Mantequilla
+    0.15,   //huevo
+    0.05,    //Sal
+    12.0    //Aceite
 )
 
 var nombrePrograma: String? = null
 
 fun main() {
 
-    nombrePrograma = "\n## Ingredientes y costo de pedidos de donas ##"
-    println(nombrePrograma!!)
+    try {
+        nombrePrograma = "\n## Ingredientes y costo de pedidos de donas ##"
+        println(nombrePrograma!!)
 
-    print("\nTotal de donas a elaborar: ")
-    val tot = readln().toInt()
+        print("\nTotal de donas a elaborar: ")
+        val tot = readln().toInt()
+        if (tot< pedidoMinimo){
+            println("Deben ser minimo 20 donas")
+            main()
+        }
+        val c = if (tot < 100) {
+            tot * 6.0
+        } else {
+            tot * 5.55
+        }
 
-    val c = if (tot < 100) {
-        tot * 6.0
-    } else {
-        tot * 5.55
-    }
-
-    println(
-        """
+        println(
+            """
         ***********************************
         Ingredientes para $tot donas
  
@@ -44,6 +50,9 @@ fun main() {
         Total a cobrar: $${Math.round(c)}
         ***********************************
     """
-    )
+        )
+    } catch (e: NumberFormatException){
+        println("Por favor solo ingresa numeros enteros")
+    }
     main()
 }
